@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title></title>
+    <link rel="stylesheet" href="css/jquery.rateyo.css">
+    <link rel="stylesheet" href="css/jqcloud.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.dropdown.js"></script>
+    <script src="js/jquery.rateyo.js"></script>
+    <script src="js/jqcloud.min.js"></script>
+    <script src="js/jquery.visible.min.js"></script>
+    <script src="js/zooming.js"></script>
+    <script src="js/ejsnew.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/highchart/highcharts.js"></script>
+    <script src="js/highchart/highcharts-more.js"></script>
+    <script src="js/highchart/modules/solid-gauge.js"></script>
+    <script src="js/highchart/modules/no-data-to-display.js"></script>
+    <script src="js/highchart/setting.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+  var scores = <%- JSON.stringify(scores) %>;
+  var myUser = <%- JSON.stringify(user) %>;
+
+</script>
+</head>
+
+<body>
+    <header>
+        <% include ./partials/header %>
+        <% include ./partials/modal-login %>
+    </header>
+    <div class="body">
+        <header class="header animated fadeInDown">
+            <h4 class="num-reviews left text-overflow">24727 reviews were placed for thisiswebsite.com</h4>
+            <div class="right">
+                <button class="btn btn-default">Q & A (4)</button>
+                <buttn class="btn btn-primary">Make your review</buttn>
+            </div>
+        </header>
+        <aside class="sidebar-left animated fadeInLeft">
+            <h4 class="companyName">thisiswebsite.com</h4>
+            <div class="overall">
+                <span class="text-primary lter text-lg">Overall</span>
+                <span id="overall-stars"></span>
+                <span class="score text-primary text-lg"></span>
+            </div>
+            <div class="container-overall">
+                <div class="title clearfix">
+                    <div class="name text-md">Overview</div>
+                    <!-- <div class="icons">
+                        <i class="fa fa-circle text-success"></i>Positive
+                        <i class="fa fa-circle text-danger"></i>Negtive
+                    </div> -->
+                </div>
+                <div id="chart-overall"></div>
+            </div>
+            <section class="specifics">
+                <div class="row">
+                    <div class="col-6 col-xs-12">
+                        <div class="specific text-info lter text-lg">
+                            <div class="title">
+                                <span class="icon"><i class="fa fa-phone"></i></span>
+                                <span>Phone Support</span>
+                            </div>
+                            <div id="chart-phone" class="chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xs-12">
+                        <div class="specific text-info lter text-lg">
+                            <div class="title">
+                                <span class="icon"><i class="fa fa-sitemap"></i></span>
+                                <span>Website</span>
+                            </div>
+                            <div id="chart-website" class="chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xs-12">
+                        <div class="specific text-info lter text-lg">
+                            <div class="title">
+                                <span class="icon"><i class="fa fa-group"></i></span>
+                                <span>Representative</span>
+                            </div>
+                            <div id="chart-representative" class="chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xs-12">
+                        <div class="specific text-info lter text-lg">
+                            <div class="title">
+                                <span class="icon"><i class="fa fa-truck"></i></span>
+                                <span>Shipping</span>
+                            </div>
+                            <div id="chart-shipping" class="chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-xs-12">
+                        <div class="specific text-info lter text-lg">
+                            <div class="title">
+                                <span class="icon"><i class="fa fa-handshake-o"></i></span>
+                                <span>Conflict resolution</span>
+                            </div>
+                            <div id="chart-conflictResolution" class="chart"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail">
+                </div>
+            </section>
+            <section class="description">
+                <h5 class="title">Company Description</h5>
+                <div class="content">
+                    If you can't explain it simply you don't understand it well enough. -- Albert Einstein
+                </div>
+                <h5 class="phone">Phone: 010-13928392839</h5>
+            </section>
+            <section class="tags-cloud">
+                <div id="tagcloud"></div>
+            </section>
+        </aside>
+        <main class="main t-xl animated fadeInUp">
+            <section class="filters">
+                <div class="row m-b-xs">
+                    <div class="col-2">
+                        <p class="text-primary">Overall Score</p>
+                    </div>
+                    <div class="col-10 col-lg-12">
+                        <div class="multi-selector overall m-t-sm">
+                            <button class="border-primary border-md text-primary text-overflow">Excellent</button>
+                            <button class="border-primary border-md text-primary text-overflow">Very good</button>
+                            <button class="border-primary border-md text-primary text-overflow">Average</button>
+                            <button class="border-primary border-md text-primary text-overflow">Poor</button>
+                            <button class="border-primary border-md text-primary text-overflow">Terrible</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <p class="text-primary">Sort</p>
+                    </div>
+                    <div class="col-10 col-lg-12">
+                        <div class="multi-selector sort m-t-xs">
+                            <button class="border-primary border-md text-primary text-overflow">by rating</button>
+                            <button class="border-primary border-md text-primary text-overflow">by date</button>
+                            <button class="border-primary border-md text-primary text-overflow">by category</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr>
+                        <div class="filter-selection">
+                            <span class="bold">Showing 645 reviews: </span>
+                            <span></span>
+                            <span class="text-primary"></span>
+                            <span></span>
+                            <span class="text-primary"></span>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </section>
+            <section class="container reviews">
+                <article class="review new-review border-primary">
+                    <a href="/create">
+                        <div class="rate">
+                            <div id="newRate" class="stars vcenter"></div>
+                            <div class="label bg-primary text-overflow vcenter">click to review</div>
+                        </div>
+                        <div class="review-text text-muted border-default">Start to write a review for company</div>
+                    </a>
+                </article>
+                <% reviews.forEach(function (review) { %>
+                <article class="review border-primary">
+                    <div class="user">
+                        <img src="<%= review.profileImg %>" width="50" height="50" alt="User Image">
+                        <div class="desc">
+                            <p class="text-md"><%= review.username %></p>
+                            <div class="text-muted">Rep Point <span class="text-danger"><%= review.repPoints %></span></div>
+                        </div>
+                    </div>
+                    <h4 class="title text-info">"<%= review.title %>"</h4>
+                    <div class="subtitle">
+                        <div class="stars" id="<%= review.serialNum %>" data-rate="<%= review.rate %>"></div>
+                        <div class="date text-muted"><%= review.date %></div>
+                    </div>
+                    <div class="content">
+                        <%= review.content %>
+                    </div>
+                    <div class="row">
+                        <%if (review.positiveWords.length > 0) { %>
+                        <div class="col-6 col-xs-12">
+                            <div class="tag-title text-primary">What I liked <span><i class="fa fa-smile-o text-success text-lg"></i></span>
+                            </div>
+                            <div class="tags positive">
+                                <% review.positiveWords.forEach(function (tag) { %>
+                                    <div class="tag active"><%= tag %></div>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <% } %>
+                        <%if (review.negativeWords.length > 0) { %>
+                        <div class="col-6 col-xs-12">
+                            <div class="tag-title text-primary">What I didnt like <span><i class="fa fa-smile-o text-warning text-lg"></i></span>
+                            </div>
+                            <div class="tags negtive">
+                                <% review.negativeWords.forEach(function (tag) { %>
+                                    <div class="tag active"><%= tag %></div>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <%if (review.images.length > 0) { %>
+                    <div class="images">
+                        <% review.images.forEach(function (img) { %>
+                            <img src="<%= img.thumbnail %>" data-original="<%= img.original %>" width="70" />
+                        <% }) %>
+                    </div>
+                    <% } %>
+                    <footer class="row">
+                        <div class="col-7 col-sm-12 vote">
+                            <button class="btn btn-useful">Useful</button>
+                            <div class="tooltip border-useful"><%= review.useful %></div>
+                            <button class="btn btn-warning">Not Useful</button>
+                            <div class="tooltip border-warning"><%= review.notuseful %></div>
+                        </div>
+                        <div class="col-4 col-sm-10 social">
+                            <button class="btn"><i class="fa fa-facebook-official text-2x"></i></button>
+                            <button class="btn"><i class="fa fa-twitter text-2x"></i></button>
+                            <button class="btn"><i class="fa fa-link text-2x"></i></button>
+                        </div>
+                        <div class="col-1 col-sm-2 flag">
+                            <button class="btn"><i class="fa fa-flag-o text-lg"></i></button>
+                        </div>
+                    </footer>
+                    <%if (review.replies.length > 0) { %>
+                    <div class="row">
+                        <button class="btn btn-reply"><%= review.replies.length %> reply <span><i class="fa fa-sort-down"></i> </span> </button>
+                    </div>
+                    <section class="replies">
+                        <% review.replies.forEach(function (reply) { %>
+                            <article class="reply">
+                                <h6 class="title"><%= reply.title %></h6>
+                                <div class="content">
+                                    <%= reply.content %>
+                                </div>
+                            </article>
+                        <% }) %>
+                    </section>
+                    <% } %>
+                </article>
+                <% }) %>
+            </section>
+        </main>
+        <aside class="sidebar-right t-xxl animated fadeInRight">
+            <div class="advertise"></div>
+            <div class="rest">
+                <p>Rankify is a site to find and share customer service experiences with a focus on the online retailing industry.</p>
+            </div>
+        </aside>
+        <div class="advertise animated fadeInRight"></div>
+    </div>
+</body>
+
+</html>
