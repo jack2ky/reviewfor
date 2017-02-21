@@ -129,9 +129,9 @@
 	    <section class="description">
                 <h5 class="title">Company Description</h5>
                 <div class="content">
-                    Manufacturer of a wide range of consumer electronics products including audio, video, communications, and computer systems
+                    If you can't explain it simply you don't understand it well enough. -- Albert Einstein
                 </div>
-                <h5 class="phone">Phone: 010-13928392839</h5>
+                <h5 class="phone">Phone: <%= review.phoneNumber %></h5>
             </section>	
             <section class="filters">
                 <div class="row m-b-xs">
